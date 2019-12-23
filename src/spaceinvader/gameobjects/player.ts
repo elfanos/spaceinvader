@@ -21,13 +21,6 @@ const move = (
       break;
   }
 };
-function update(
-  coordinates: GameObjects.coordinates,
-  movement: GameObjects.movement
-) {
-  coordinates.x += movement.x;
-  coordinates.y += movement.y;
-}
 export interface PlayerI {
   playerMove: (direction: string) => void;
   coordinates: GameObjects.coordinates;
