@@ -9,11 +9,19 @@ function drawRectangle(
   width: number,
   height: number,
   color: string,
-  canvas: HTMLCanvasElement
+  canvas: HTMLCanvasElement,
+  previousPosition: any
 ) {
   const context = canvas.getContext("2d");
   context.fillStyle = color;
+  console.log(previousPosition.x, previousPosition.y);
   console.log(x, y);
+  context.clearRect(
+    Math.floor(previousPosition.x),
+    Math.floor(previousPosition.y),
+    width,
+    height
+  );
   context.fillRect(Math.floor(x), Math.floor(y), width, height);
 }
 
@@ -30,7 +38,6 @@ function renderCanvas(
 ) {
   const context = canvas.getContext("2d");
   const bufferContext = bufferCanvas.getContext("2d");
-  console.log("no render??");
   context.drawImage(
     bufferContext.canvas,
     0,
@@ -83,8 +90,10 @@ export const Display = (canvas: HTMLCanvasElement) => {
       y: number,
       width: number,
       height: number,
-      color: string
-    ) => drawRectangle(x, y, width, height, color, bufferCanvas),
+      color: string,
+      previousPosition: any
+    ) =>
+      drawRectangle(x, y, width, height, color, bufferCanvas, previousPosition),
     resize: (ratio: number) => resize(ratio, canvas)
   };
 };
